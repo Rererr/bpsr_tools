@@ -2,6 +2,7 @@ import { GameData, ModTableEntry, ModTypeEntry, ModEffectEntry, ModLinkEffectEnt
 
 export async function loadGameData(): Promise<GameData> {
   const base = import.meta.env.BASE_URL;
+  console.log('BASE_URL:', base);
 
   // Load all JSON files in parallel
   const [modTableData, modTypeData, modEffectData, modLinkEffectData] = await Promise.all([
