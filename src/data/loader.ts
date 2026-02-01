@@ -1,12 +1,14 @@
 import { GameData, ModTableEntry, ModTypeEntry, ModEffectEntry, ModLinkEffectEntry } from '../types/game-data';
 
 export async function loadGameData(): Promise<GameData> {
+  const base = import.meta.env.BASE_URL;
+
   // Load all JSON files in parallel
   const [modTableData, modTypeData, modEffectData, modLinkEffectData] = await Promise.all([
-    fetch('/data/modules/ModTable.json').then(r => r.json()),
-    fetch('/data/modules/ModTypeTable.json').then(r => r.json()),
-    fetch('/data/modules/ModEffectTable.json').then(r => r.json()),
-    fetch('/data/modules/ModLinkEffectTable.json').then(r => r.json()),
+    fetch(`${base}data/modules/ModTable.json`).then(r => r.json()),
+    fetch(`${base}data/modules/ModTypeTable.json`).then(r => r.json()),
+    fetch(`${base}data/modules/ModEffectTable.json`).then(r => r.json()),
+    fetch(`${base}data/modules/ModLinkEffectTable.json`).then(r => r.json()),
   ]);
 
   // Convert to Maps for efficient lookup
