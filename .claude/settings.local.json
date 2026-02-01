@@ -8,7 +8,10 @@
       "WebFetch(domain:bpsr-wiki.regnas.blue)",
       "Bash(npm run build:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite build)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []
