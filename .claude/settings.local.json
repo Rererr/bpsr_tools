@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "WebFetch(domain:klosebox.com)",
+      "WebFetch(domain:gamewith.jp)",
+      "WebFetch(domain:bpsr-wiki.regnas.blue)",
+      "Bash(npm run build:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npm run dev:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
