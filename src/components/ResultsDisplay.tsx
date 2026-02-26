@@ -3,6 +3,7 @@ import { useModuleContext } from '../contexts/ModuleContext'
 import { UI_TEXT } from '../data/ui-text'
 import { formatStatValue } from '../data/stat-mappings'
 import { formatLinkValue } from '../utils/calculator'
+import DiffDisplay from './DiffDisplay'
 
 type TabType = 'summary' | 'details'
 
@@ -33,6 +34,9 @@ function ResultsDisplay() {
   return (
     <div className="results-display">
       <h2 className="results-title">{UI_TEXT.resultsTitle}</h2>
+
+      {/* Diff Display */}
+      <DiffDisplay />
 
       {/* Link Summary - like official UI */}
       <div className="link-summary">

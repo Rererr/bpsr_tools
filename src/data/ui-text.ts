@@ -42,5 +42,34 @@ export const UI_TEXT = {
     attack: '攻撃型',
     other: '支援型',
     guard: '防御型',
-  }
+  },
+
+  // プリセット
+  savedPresets: '保存されたプリセット',
+  saveCurrentConfig: '現在の設定を保存',
+  loadPreset: '読込',
+  deletePreset: '削除',
+  presetName: 'プリセット名',
+  noPresets: 'プリセットがありません',
+  save: '保存',
+  confirmDelete: 'このプリセットを削除しますか？',
+
+  // 差分
+  changesFromBase: '変更点',
+  comparedTo: '基準',
+  increased: '増加',
+  decreased: '減少',
+  clearComparison: '比較をクリア',
+  noChanges: '変更なし',
+
+  // 理想値
+  idealValues: '目標Lv設定',
+  currentLv: '現在Lv',
+  targetLv: '目標Lv',
+  remaining: 'あと必要',
+  achieved: '達成済み',
+  points: 'ポイント',
+  saveTarget: '目標を保存',
+  clearTargets: 'クリア',
+  clearAll: '全てクリア',
 };

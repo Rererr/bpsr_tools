@@ -37,8 +37,22 @@ export interface LinkBonus {
   }[];
 }
 
+export interface ComparisonBase {
+  presetId: string;
+  presetName: string;
+  results: CalculationResult[];
+}
+
+export interface IdealLinkLevel {
+  effectName: string;      // 効果名（英語）
+  effectNameJP: string;    // 効果名（日本語表示用）
+  targetLv: number;        // 目標Lv (1-6)
+}
+
 export interface ModuleState {
   slots: ModuleSlot[];
   results: CalculationResult[];
   linkBonuses: LinkBonus[];
+  comparisonBase: ComparisonBase | null;
+  idealLevels: IdealLinkLevel[];
 }

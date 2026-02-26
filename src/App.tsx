@@ -5,6 +5,8 @@ import { GameData } from './types/game-data'
 import { UI_TEXT } from './data/ui-text'
 import ModuleSlot from './components/ModuleSlot'
 import ResultsDisplay from './components/ResultsDisplay'
+import PresetManager from './components/PresetManager'
+import IdealValuesPanel from './components/IdealValuesPanel'
 
 function App() {
   const [gameData, setGameData] = useState<GameData | null>(null)
@@ -57,7 +59,11 @@ function App() {
             <ModuleSlot slotId="slot-3" slotNumber={4} gameData={gameData} />
           </div>
 
-          <ResultsDisplay />
+          <div className="results-panel">
+            <ResultsDisplay />
+            <PresetManager />
+            <IdealValuesPanel />
+          </div>
         </main>
       </div>
     </ModuleProvider>
