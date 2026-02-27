@@ -1,6 +1,6 @@
 import { ModuleSlot, CalculationResult, LinkBonus } from '../types/module-state';
 import { GameData } from '../types/game-data';
-import { getStatName } from '../data/stat-mappings';
+import { getStatName, STAT_MAP } from '../data/stat-mappings';
 import { getEffectNameJP, LINK_BONUS_EFFECTS } from '../data/effect-types';
 
 export function calculateResults(slots: ModuleSlot[]): CalculationResult[] {
@@ -196,8 +196,8 @@ function getEffectSpecificBonus(
   effectEntry.EffectConfig.forEach(config => {
     if (config.length >= 3) {
       const [_type, statId, value] = config;
-      // Filter out special IDs like 99006
-      if (statId >= 11000 && statId < 90000) {
+      // Only include stat IDs that have a known mapping
+      if (STAT_MAP.has(statId)) {
         bonuses.push({
           statId,
           statName: getStatName(statId),

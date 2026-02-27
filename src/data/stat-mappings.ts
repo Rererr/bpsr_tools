@@ -46,6 +46,26 @@ export const STAT_MAPPINGS: StatMapping[] = [
 
   // Elemental
   { id: 13002, name: 'AllElement_Add', displayName: '全属性強', description: '全属性強度 (加算)' },
+
+  // Composite stat IDs (represent multiple stats depending on build)
+  { id: 99006, name: 'ATK_MATK_Composite', displayName: '物攻/魔攻', description: '物理攻撃力/魔法攻撃力 (複合)' },
+  { id: 99005, name: 'STR_INT_AGI_Composite', displayName: '筋力/知力/敏捷', description: '筋力/知力/敏捷 (複合)' },
+
+  // Passive effect activations (type 3 in EffectConfig, value=1 = activation flag)
+  { id: 2300020, name: 'EliteStrike_Passive', displayName: '精鋭ダメージ強化', description: '精鋭ダメージ強化効果' },
+  { id: 2300070, name: 'LifeCondense_Passive', displayName: 'HP凝縮効果', description: 'HP凝縮パッシブ効果' },
+  { id: 2300080, name: 'LifeSteal_Passive', displayName: 'HP吸収効果', description: 'HP吸収パッシブ効果' },
+  { id: 2300120, name: 'SpecialAttack_Passive', displayName: '特殊属性ダメージ強化', description: '特殊属性ダメージ強化効果' },
+  { id: 2300220, name: 'PhysDamage_Passive', displayName: '物理ダメージ強化', description: '物理ダメージ強化効果' },
+  { id: 2300310, name: 'MagicDamage_Passive', displayName: '魔法ダメージ強化', description: '魔法ダメージ強化効果' },
+  { id: 2300410, name: 'MasteryHeal_Passive', displayName: 'マスタリー回復強化', description: 'マスタリー回復強化効果' },
+  { id: 2300420, name: 'SpecialHeal_Passive', displayName: '特殊回復強化', description: '特殊回復強化効果' },
+  { id: 2300620, name: 'DMGStack_Passive', displayName: '与ダメージ上昇', description: '与ダメージ上昇効果' },
+  { id: 2300820, name: 'FinalProtection_Passive', displayName: '絶境守護効果', description: '絶境守護パッシブ効果' },
+  { id: 2302020, name: 'Agile_Passive', displayName: '敏捷効果', description: '敏捷パッシブ効果' },
+  { id: 2302120, name: 'TeamLuckCrit_Passive', displayName: '会心/幸運強化', description: 'パーティ会心/幸運強化効果' },
+  { id: 2302320, name: 'FirstAid_Passive', displayName: '応急処置効果', description: '応急処置パッシブ効果' },
+  { id: 2302420, name: 'LifeWave_Passive', displayName: 'HP変動効果', description: 'HP変動パッシブ効果' },
 ];
 
 export const STAT_MAP = new Map(STAT_MAPPINGS.map(s => [s.id, s]));
@@ -68,7 +88,22 @@ export function getStatName(statId: number): string {
   return STAT_MAP.get(statId)?.displayName || `不明なステータス (${statId})`;
 }
 
+// Set of stat IDs that are passive activation flags (value=1 means active)
+const PASSIVE_ACTIVATION_STATS = new Set([
+  2300020, 2300070, 2300080, 2300120, 2300220, 2300310,
+  2300410, 2300420, 2300620, 2300820, 2302020, 2302120,
+  2302320, 2302420,
+]);
+
+export function isPassiveActivation(statId: number): boolean {
+  return PASSIVE_ACTIVATION_STATS.has(statId);
+}
+
 export function formatStatValue(statId: number, value: number): string {
+  // Passive activation flags: show "発動" instead of numeric value
+  if (PASSIVE_ACTIVATION_STATS.has(statId)) {
+    return '発動';
+  }
   // For percentage stats (万分率), divide by 100 and add %
   if (PERCENTAGE_STATS.has(statId)) {
     return `+${(value / 100).toFixed(1)}%`;
