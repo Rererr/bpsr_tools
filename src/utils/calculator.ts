@@ -76,33 +76,31 @@ export function calculateLinkBonuses(slots: ModuleSlot[], gameData: GameData): L
     }
 
     const effectBonuses = getEffectSpecificBonus(effectName, linkValue, gameData);
-    if (effectBonuses.length > 0) {
-      const thresholds = [
-        { level: 6, minLink: 20 },
-        { level: 5, minLink: 16 },
-        { level: 4, minLink: 12 },
-        { level: 3, minLink: 8 },
-        { level: 2, minLink: 4 },
-        { level: 1, minLink: 1 },
-      ];
+    const thresholds = [
+      { level: 6, minLink: 20 },
+      { level: 5, minLink: 16 },
+      { level: 4, minLink: 12 },
+      { level: 3, minLink: 8 },
+      { level: 2, minLink: 4 },
+      { level: 1, minLink: 1 },
+    ];
 
-      let activatedLevel = 0;
-      for (const threshold of thresholds) {
-        if (linkValue >= threshold.minLink) {
-          activatedLevel = threshold.level;
-          break;
-        }
+    let activatedLevel = 0;
+    for (const threshold of thresholds) {
+      if (linkValue >= threshold.minLink) {
+        activatedLevel = threshold.level;
+        break;
       }
-
-      bonuses.push({
-        effectName,
-        effectNameJP: getEffectNameJP(effectName),
-        linkLevel: linkValue,
-        activatedLevel,
-        toNextLevel: getToNextLevel(linkValue),
-        bonusEffects: effectBonuses,
-      });
     }
+
+    bonuses.push({
+      effectName,
+      effectNameJP: getEffectNameJP(effectName),
+      linkLevel: linkValue,
+      activatedLevel,
+      toNextLevel: getToNextLevel(linkValue),
+      bonusEffects: effectBonuses,
+    });
   });
 
   // 2. Add global link bonus (base stats = totalLinkValue * 2)

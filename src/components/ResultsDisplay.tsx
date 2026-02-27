@@ -12,8 +12,9 @@ function ResultsDisplay() {
   const { results, linkBonuses } = state
   const [activeTab, setActiveTab] = useState<TabType>('summary')
 
-  // Calculate total link level
-  const totalLinkLevel = linkBonuses.reduce((sum, bonus) => sum + bonus.linkLevel, 0)
+  // Calculate total link level (use Global Link to avoid double-counting)
+  const globalLink = linkBonuses.find(b => b.effectName === 'Global Link')
+  const totalLinkLevel = globalLink?.linkLevel ?? 0
 
   // Calculate main stats summary from results
   const mainStats = ['攻力', '知力', '精神', '耐久力']
